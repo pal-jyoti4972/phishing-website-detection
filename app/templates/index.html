@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Phishing Website Detection</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <div class="shield">🛡️</div>
+
+            <h1>Phishing Website Detection</h1>
+
+            <p>
+                Deep Learning Based Website Security System
+            </p>
+        </div>
+
+
+        <div class="card">
+
+            <h2>Check Website URL</h2>
+
+            <p class="description">
+                Enter a website URL to determine whether it is
+                legitimate or potentially phishing.
+            </p>
+
+
+            <form action="/predict" method="POST">
+
+                <input
+                    type="text"
+                    name="url"
+                    placeholder="https://example.com"
+                    value="{{ url if url else '' }}"
+                    required
+                >
+
+                <button type="submit">
+                    🔍 Check Website
+                </button>
+
+            </form>
+
+
+            {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            {% if result %}
+
+            <div class="result">
+
+                {% if result == "PHISHING" %}
+
+                <div class="result-icon danger">
+                    ⚠️
+                </div>
+
+                <h2 class="phishing">
+                    PHISHING WEBSITE
+                </h2>
+
+                <p>
+                    This URL shows characteristics associated
+                    with phishing websites.
+                </p>
+
+                {% else %}
+
+                <div class="result-icon safe">
+                    ✓
+                </div>
+
+                <h2 class="legitimate">
+                    LEGITIMATE WEBSITE
+                </h2>
+
+                <p>
+                    This URL appears legitimate based on
+                    the trained model.
+                </p>
+
+                {% endif %}
+
+
+                <div class="confidence">
+
+                    <span>Confidence</span>
+
+                    <strong>
+                        {{ confidence }}%
+                    </strong>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="info">
+
+            <div>
+                <strong>🤖 Deep Learning</strong>
+                <span>Neural Network Based Detection</span>
+            </div>
+
+            <div>
+                <strong>🔐 URL Analysis</strong>
+                <span>Multiple URL Features Analyzed</span>
+            </div>
+
+            <div>
+                <strong>⚡ Fast Detection</strong>
+                <span>Instant Prediction</span>
+            </div>
+
+        </div>
+
+
+        <footer>
+            <p>
+                Mini Project • Deep Learning Based Phishing Detection System
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
